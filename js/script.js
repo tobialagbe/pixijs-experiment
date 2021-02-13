@@ -38,10 +38,13 @@ PIXI.loader
     let bg = new PIXI.Sprite(PIXI.loader.resources["../assets/industrial.jpg"].texture);
     let pl = new PIXI.Sprite(PIXI.loader.resources["../assets/pillar.png"].texture);
     
-    // bg.position.set(0.5, 0.5);
+    bg.x = sizes.width/2;
+    bg.y = sizes.height/2;
     // bg.width = "auto";
     // bg.height = sizes.height;
-    bg.scale.set(1.8, 1.8);
+    bg.anchor.x = 0.5;
+    bg.anchor.y = 0.5;
+    bg.scale.set(2, 2);
     // bg.anchor.set(0.5);
 
 
