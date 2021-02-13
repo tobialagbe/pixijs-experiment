@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
-var displacementSprite;
+
+ // https://www.youtube.com/watch?v=FgN2EENWPFc
+
+var displacementSprite,displacementFilter;
 
 const sizes = {
     width: window.innerWidth,
@@ -60,7 +63,7 @@ PIXI.loader
 
 
     displacementSprite = PIXI.Sprite.from('../assets/displacement-sprite.png');
-    const displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
+    displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
 
     app.stage.addChild(displacementSprite);
 
@@ -137,9 +140,14 @@ PIXI.loader
 
 
 function onPointerMove(eventData) {
-    console.log("move it");
     displacementSprite.position.set(eventData.clientX - 25, eventData.clientY);
 }
+
+
+// function onPointerMove(eventData) {
+//     displacementFilter.scale.x = (window.innerWidth/2 - eventData.clientX) /25;
+//     displacementFilter.scale.y = (window.innerHeight/2 - eventData.clientY) /25;
+// }
 
 
 
