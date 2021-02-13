@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     // https://www.youtube.com/watch?v=FgN2EENWPFc
    
-   var displacementSprite,displacementFilter;
+   var displacementSprite,displacementFilter,bg;
    
    const sizes = {
        width: window.innerWidth,
@@ -41,16 +41,17 @@ $(document).ready(function(){
    
    
        //Create the sprites
-       let bg = new PIXI.Sprite(PIXI.loader.resources["../assets/industrial.jpg"].texture);
-       let pl = new PIXI.Sprite(PIXI.loader.resources["../assets/pillar.png"].texture);
+       bg = new PIXI.Sprite(PIXI.loader.resources["../assets/industrial.jpg"].texture);
        
        bg.x = sizes.width/2;
        bg.y = sizes.height/2;
-       bg.width = sizes.width;
-       bg.height = sizes.width/1.46;
+    //    bg.width = sizes.width;
+    //    bg.height = sizes.width/1.46;
+        bg.width = sizes.height * 1.46;
+        bg.height = sizes.height;
        bg.anchor.x = 0.5;
        bg.anchor.y = 0.5;
-       // bg.scale.set(2, 2);
+       bg.scale.set(2, 2);
        // bg.anchor.set(0.5);
    
   
@@ -79,8 +80,8 @@ $(document).ready(function(){
        app.stage.addChild(bg);
    
    
-       let bdy = document.getElementById("bdy")
-       bdy.addEventListener("mousemove", onPointerMove);
+    //    let bdy = document.getElementById("bdy")
+    //    bdy.addEventListener("mousemove", onPointerMove);
        // app.stage
        // .on('mousemove', onPointerMove)
        // .on('touchmove', onPointerMove);
@@ -88,43 +89,21 @@ $(document).ready(function(){
    
     
    
-    //    app.ticker.add(function(delta) {
-           
-    //        document.getElementById("bdy").addEventListener("wheel", function(){
-    //            // bg.scale.set(bg.scale.x += 0.000002, bg.scale.y += 0.00002);
-               
-    //            if (detectMouseWheelDirection() == "down") {
-                   
+       app.ticker.add(function(delta) {
+
+            if (displacementSprite.x < window.innerWidth + 50) {
+                displacementSprite.position.set(displacementSprite.x += 20 * delta, displacementSprite.y);  
+            }else{
+                displacementSprite.position.set(0, displacementSprite.y); 
+            }
+
+            if (displacementSprite.y < window.innerHeight + 50) {
+                displacementSprite.position.set(displacementSprite.x, displacementSprite.y += 5 * delta);  
+            }else{
+                displacementSprite.position.set(displacementSprite.x, 0); 
+            }
    
-    //                if (pl.height < sizes.height*2) {
-    //                    bg.scale.x += 0.000038 * delta;
-    //                    bg.scale.y += 0.000038 * delta;
-           
-    //                    pl.scale.x += 0.00004 * delta;
-    //                    pl.scale.y += 0.00004 * delta;
-    //                }
-   
-   
-    //            }else{
-   
-    //                if (pl.height > sizes.height + 20) {
-   
-    //                    bg.scale.x -= 0.000038 * delta;
-    //                    bg.scale.y -= 0.000038 * delta;
-           
-    //                    pl.scale.x -= 0.00004 * delta;
-    //                    pl.scale.y -= 0.00004 * delta;
-   
-   
-    //                }
-   
-    //                console.log(bg.scale.x)
-   
-    //            }
-   
-    //        });
-   
-    //    });
+       });
    
    
      }
@@ -138,9 +117,9 @@ $(document).ready(function(){
    
    
    
-   function onPointerMove(eventData) {
-       displacementSprite.position.set(eventData.clientX - 25, eventData.clientY);
-   }
+//    function onPointerMove(eventData) {
+//        displacementSprite.position.set(eventData.clientX - 25, eventData.clientY);
+//    }
    
    
    // function onPointerMove(eventData) {
@@ -149,30 +128,21 @@ $(document).ready(function(){
    // }
    
    
+
    
-   
-   
-     function detectMouseWheelDirection( e )
-   {
-       var delta = null,
-           direction = false
-       ;
-       if ( !e ) { // if the event is not provided, we get it from the window object
-           e = window.event;
-       }
-       if ( e.wheelDelta ) { // will work in most cases
-           delta = e.wheelDelta / 60;
-       } else if ( e.detail ) { // fallback for Firefox
-           delta = -e.detail / 2;
-       }
-       if ( delta !== null ) {
-           direction = delta > 0 ? 'up' : 'down';
-       }
-   
-       return direction;
-   }
-   
-   
+
+
+
+   window.addEventListener("resize", function(){
+
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+    bg.width = window.innerHeight * 1.46;
+    bg.height = window.innerHeight;
+    bg.anchor.x = 0.5;
+    bg.anchor.y = 0.5;
+
+
+   });
    
    
    
