@@ -80,8 +80,8 @@ $(document).ready(function(){
        app.stage.addChild(bg);
    
    
-    //    let bdy = document.getElementById("bdy")
-    //    bdy.addEventListener("mousemove", onPointerMove);
+       let bdy = document.getElementById("bdy")
+       bdy.addEventListener("mousemove", onPointerMove);
        // app.stage
        // .on('mousemove', onPointerMove)
        // .on('touchmove', onPointerMove);
@@ -89,21 +89,21 @@ $(document).ready(function(){
    
     
    
-       app.ticker.add(function(delta) {
+    //    app.ticker.add(function(delta) {
 
-            if (displacementSprite.x < window.innerWidth + 50) {
-                displacementSprite.position.set(displacementSprite.x += 20 * delta, displacementSprite.y);  
-            }else{
-                displacementSprite.position.set(0, displacementSprite.y); 
-            }
+    //         if (displacementSprite.x < window.innerWidth + 50) {
+    //             displacementSprite.position.set(displacementSprite.x += 20 * delta, displacementSprite.y);  
+    //         }else{
+    //             displacementSprite.position.set(0, displacementSprite.y); 
+    //         }
 
-            if (displacementSprite.y < window.innerHeight + 50) {
-                displacementSprite.position.set(displacementSprite.x, displacementSprite.y += 5 * delta);  
-            }else{
-                displacementSprite.position.set(displacementSprite.x, 0); 
-            }
+    //         if (displacementSprite.y < window.innerHeight + 50) {
+    //             displacementSprite.position.set(displacementSprite.x, displacementSprite.y += 5 * delta);  
+    //         }else{
+    //             displacementSprite.position.set(displacementSprite.x, 0); 
+    //         }
    
-       });
+    //    });
    
    
      }
@@ -117,9 +117,9 @@ $(document).ready(function(){
    
    
    
-//    function onPointerMove(eventData) {
-//        displacementSprite.position.set(eventData.clientX - 25, eventData.clientY);
-//    }
+   function onPointerMove(eventData) {
+       displacementSprite.position.set(eventData.clientX - 25, eventData.clientY);
+   }
    
    
    // function onPointerMove(eventData) {
